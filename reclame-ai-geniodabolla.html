@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reclame Aí — geniodabolla</title>
+<style>
+  :root{
+    --bg: #fdf6ee;
+    --paper: #ffffff;
+    --ink: #241a12;
+    --brand: #ff5a1f;
+    --brand-dark: #c73e0a;
+    --guloso: #ffb703;
+    --line: #ecdfcd;
+    --muted: #8a7a68;
+    --stamp: #b8871f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,183,3,0.05) 0 40px, transparent 40px 80px),
+      var(--bg);
+    color:var(--ink);
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wm-banner{
+    position:sticky; top:0; z-index:50;
+    background: repeating-linear-gradient(45deg, #1a1310, #1a1310 14px, #2c2117 14px, #2c2117 28px);
+    color:#ffdca6;
+    text-align:center;
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-weight:800;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-size:12px;
+    padding:8px 10px;
+    border-bottom:3px solid var(--brand);
+  }
+  header.hero{
+    background: var(--brand);
+    background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12), transparent 45%);
+    color:#fff8ee;
+    padding: 26px 20px 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .stamp{
+    position:absolute;
+    top:22px; right:24px;
+    border:3px solid #fff2df;
+    color:#fff2df;
+    padding:8px 14px;
+    font-family: -apple-system, Arial, sans-serif;
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:0.08em;
+    transform: rotate(9deg);
+    border-radius:6px;
+    opacity:0.85;
+  }
+  .brandbar{
+    display:flex; align-items:center; gap:10px;
+    max-width:900px; margin:0 auto;
+    font-family: -apple-system, Arial, sans-serif;
+  }
+  .logo{
+    font-weight:900; font-size:22px; letter-spacing:-0.02em;
+  }
+  .logo span{color:#2b1000; background:#fff2df; padding:1px 8px; border-radius:4px; margin-left:2px;}
+  .hero-inner{
+    max-width:900px; margin: 34px auto 0;
+    text-align:center;
+  }
+  .eyebrow{
+    font-family:-apple-system, Arial, sans-serif;
+    font-size:12px; font-weight:700; letter-spacing:0.14em;
+    text-transform:uppercase; color:#ffe4c2; margin-bottom:10px;
+  }
+  h1{
+    font-size: clamp(28px, 5vw, 46px);
+    margin: 0 0 12px;
+    line-height:1.08;
+  }
+  .hero-sub{
+    font-family:-apple-system, Arial, sans-serif;
+    max-width:560px; margin:0 auto; color:#ffe9d1; font-size:15px;
+  }
+  .search-fake{
+    max-width:520px; margin:26px auto 0;
+    background:#fff; border-radius:10px; padding:6px;
+    display:flex; gap:6px; box-shadow:0 12px 30px rgba(60,20,0,0.25);
+  }
+  .search-fake input{
+    flex:1; border:none; outline:none; padding:10px 12px;
+    font-family:-apple-system, Arial, sans-serif; font-size:14px; color:var(--ink);
+  }
+  .search-fake button{
+    background:var(--ink); color:#fff2df; border:none; border-radius:7px;
+    padding:0 18px; font-family:-apple-system, Arial, sans-serif; font-weight:700;
+    font-size:13px; cursor:default;
+  }
+
+  main{max-width:900px; margin:-30px auto 60px; padding:0 18px;}
+
+  .company-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px 24px;
+    box-shadow:0 18px 40px rgba(60,30,0,0.08);
+    display:flex; justify-content:space-between; align-items:center;
+    gap:16px; flex-wrap:wrap;
+    margin-bottom:30px;
+    font-family:-apple-system, Arial, sans-serif;
+  }
+  .company-card h2{
+    font-family:'Georgia', serif;
+    margin:0 0 4px; font-size:22px;
+  }
+  .company-meta{color:var(--muted); font-size:13px;}
+  .score{
+    text-align:center;
+    background:#fff4e0;
+    border:2px dashed var(--guloso);
+    border-radius:12px;
+    padding:10px 18px;
+    min-width:120px;
+  }
+  .score b{display:block; font-size:26px; color:var(--brand-dark);}
+  .score span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;}
+
+  .section-title{
+    font-family:-apple-system, Arial, sans-serif;
+    font-size:13px; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--muted); font-weight:700;
+    margin: 34px 0 14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title::after{
+    content:""; flex:1; height:1px; background:var(--line);
+  }
+
+  .complaint{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px 22px;
+    margin-bottom:18px;
+    position:relative;
+  }
+  .complaint-head{
+    display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    align-items:flex-start;
+    font-family:-apple-system, Arial, sans-serif;
+  }
+  .user{
+    display:flex; align-items:center; gap:10px;
+  }
+  .avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:linear-gradient(135deg, var(--guloso), var(--brand));
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:15px; flex-shrink:0;
+  }
+  .user-name{font-weight:700; font-size:14.5px;}
+  .user-sub{font-size:12px; color:var(--muted);}
+  .status{
+    font-size:11px; font-weight:800; text-transform:uppercase;
+    letter-spacing:0.05em; padding:5px 10px; border-radius:20px;
+    white-space:nowrap;
+  }
+  .status.resolvido{background:#e4f6e9; color:#1f7a3f;}
+  .status.naoresolvido{background:#fde6e0; color:var(--brand-dark);}
+  .status.respondido{background:#fff2d4; color:#8a5b00;}
+
+  .stars{color:var(--guloso); font-size:14px; margin:8px 0 2px; letter-spacing:2px;}
+  .complaint-title{
+    font-size:17px; margin:8px 0 6px; font-weight:700;
+  }
+  .complaint-body{
+    font-size:14.5px; line-height:1.55; color:#39291b;
+  }
+  .tags{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;}
+  .tag{
+    font-family:-apple-system, Arial, sans-serif;
+    background:#fdf1e4; color:var(--brand-dark);
+    border:1px solid #f4dcc0; font-size:11px; padding:4px 9px;
+    border-radius:20px; font-weight:600;
+  }
+  .reply{
+    margin-top:14px; padding:14px 16px;
+    background:#faf6ef; border-left:3px solid var(--brand);
+    border-radius:0 8px 8px 0;
+    font-size:13.5px; color:#4a3a2a;
+    font-family:-apple-system, Arial, sans-serif;
+  }
+  .reply b{color:var(--brand-dark);}
+
+  .cta-fake{
+    margin-top:44px; text-align:center;
+    background: var(--ink); color:#ffe9d1;
+    border-radius:14px; padding:30px 20px;
+    font-family:-apple-system, Arial, sans-serif;
+  }
+  .cta-fake h3{margin:0 0 8px; font-family:Georgia, serif; font-size:20px;}
+  .cta-fake p{font-size:13px; color:#d8c3a6; max-width:420px; margin:0 auto 16px;}
+  .cta-fake button{
+    background:var(--brand); color:#fff; border:none; padding:12px 26px;
+    border-radius:8px; font-weight:800; font-size:13px; cursor:default;
+  }
+
+  footer{
+    text-align:center; padding:26px 16px 40px;
+    font-family:-apple-system, Arial, sans-serif;
+    font-size:12px; color:var(--muted);
+    line-height:1.7;
+  }
+  footer .wm{
+    display:inline-block; margin-top:8px; padding:4px 10px;
+    border:1px solid var(--line); border-radius:6px;
+    letter-spacing:0.08em; text-transform:uppercase; font-weight:700; font-size:10px;
+    color:var(--stamp);
+  }
+
+  @media (max-width:520px){
+    .stamp{top:12px; right:12px; font-size:11px; padding:6px 10px;}
+    .company-card{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="wm-banner">⚠ conteúdo de humor — paródia entre amigos, não é uma reclamação real ⚠</div>
+
+  <header class="hero">
+    <div class="stamp">PARÓDIA / HUMOR</div>
+    <div class="brandbar">
+      <div class="logo">reclame<span>aí</span></div>
+    </div>
+    <div class="hero-inner">
+      <div class="eyebrow">Perfil da empresa</div>
+      <h1>geniodabolla</h1>
+      <p class="hero-sub">Canal acusado, por unanimidade da assinatura, de gulosice recorrente e insistência em coisas "gulosas" fora de hora. Site 100% zoeira, feito pros amigos rirem.</p>
+      <div class="search-fake">
+        <input placeholder="Buscar outras reclamações sobre gulosice..." disabled>
+        <button>Buscar</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="company-card">
+      <div>
+        <h2>geniodabolla</h2>
+        <div class="company-meta">Categoria: Entretenimento / Conteúdo Guloso · Respondeu 3 de 47 reclamações (nenhuma de verdade)</div>
+      </div>
+      <div class="score">
+        <b>2,1</b>
+        <span>Índice de Gulosice</span>
+      </div>
+    </div>
+
+    <div class="section-title">Reclamações recentes</div>
+
+    <div class="complaint">
+      <div class="complaint-head">
+        <div class="user">
+          <div class="avatar">VK</div>
+          <div>
+            <div class="user-name">Victor Keinuh</div>
+            <div class="user-sub">São Paulo, SP · há 2 minutos</div>
+          </div>
+        </div>
+        <span class="status naoresolvido">Não resolvido</span>
+      </div>
+      <div class="stars">★★☆☆☆</div>
+      <div class="complaint-title">Só faz coisas estranhas e gulosas</div>
+      <div class="complaint-body">
+        O canal geniodabolla só faz coisas estranhas e gulosas... está me incomodando! Próxima vez que ele falar que quer coisas gulosas eu vou reembolsar meu sub e sair.
+      </div>
+      <div class="tags">
+        <span class="tag">gulosice não solicitada</span>
+        <span class="tag">ameaça de reembolso</span>
+      </div>
+    </div>
+
+    <div class="complaint">
+      <div class="complaint-head">
+        <div class="user">
+          <div class="avatar">MF</div>
+          <div>
+            <div class="user-name">Marcela F.</div>
+            <div class="user-sub">Campinas, SP · há 18 minutos</div>
+          </div>
+        </div>
+        <span class="status respondido">Respondido</span>
+      </div>
+      <div class="stars">★★★☆☆</div>
+      <div class="complaint-title">Live inteira falando de coisa gulosa e nem entregou a coisa gulosa</div>
+      <div class="complaint-body">
+        Entrei na live às 20h porque o título dizia "hoje tem coisa gulosa". Duas horas de conversa sobre coisas gulosas, zero coisa gulosa entregue. Isso é propaganda enganosa de gulosice.
+      </div>
+      <div class="reply"><b>Resposta de geniodabolla:</b> a coisa gulosa estava no meu coração o tempo todo.</div>
+      <div class="tags">
+        <span class="tag">propaganda enganosa</span>
+        <span class="tag">gulosice prometida e não entregue</span>
+      </div>
+    </div>
+
+    <div class="complaint">
+      <div class="complaint-head">
+        <div class="user">
+          <div class="avatar">RT</div>
+          <div>
+            <div class="user-name">Rodrigo T.</div>
+            <div class="user-sub">Taubaté, SP · há 41 minutos</div>
+          </div>
+        </div>
+        <span class="status naoresolvido">Não resolvido</span>
+      </div>
+      <div class="stars">★☆☆☆☆</div>
+      <div class="complaint-title">Estranheza nível 10, gulosice nível 10</div>
+      <div class="complaint-body">
+        Pedi pra ele parar de misturar coisa estranha com coisa gulosa no mesmo assunto e ele simplesmente aumentou a dose dos dois. Não sei mais o que esperar do canal.
+      </div>
+      <div class="tags">
+        <span class="tag">coisa estranha</span>
+        <span class="tag">reincidência</span>
+      </div>
+    </div>
+
+    <div class="complaint">
+      <div class="complaint-head">
+        <div class="user">
+          <div class="avatar">JL</div>
+          <div>
+            <div class="user-name">Juliana L.</div>
+            <div class="user-sub">Ribeirão Preto, SP · há 1 hora</div>
+          </div>
+        </div>
+        <span class="status resolvido">Resolvido</span>
+      </div>
+      <div class="stars">★★★★☆</div>
+      <div class="complaint-title">Avisei sobre a gulosice e fui ignorada</div>
+      <div class="complaint-body">
+        Mandei mensagem pedindo menos coisa gulosa no conteúdo. Recebi like e mais uma hora inteira de coisa gulosa em seguida. Pelo menos curtiu meu comentário.
+      </div>
+      <div class="reply"><b>Resposta de geniodabolla:</b> curtir o comentário já é meio caminho andado pra resolver, né?</div>
+      <div class="tags">
+        <span class="tag">like sem ação</span>
+      </div>
+    </div>
+
+    <div class="complaint">
+      <div class="complaint-head">
+        <div class="user">
+          <div class="avatar">PS</div>
+          <div>
+            <div class="user-name">Pedro S.</div>
+            <div class="user-sub">Sorocaba, SP · há 3 horas</div>
+          </div>
+        </div>
+        <span class="status naoresolvido">Não resolvido</span>
+      </div>
+      <div class="stars">★★☆☆☆</div>
+      <div class="complaint-title">Sub cancelado por excesso de coisa gulosa</div>
+      <div class="complaint-body">
+        Já é a terceira vez que ele fala "quero uma coisa bem gulosa hoje" no chat. Não aguento mais. Se acontecer de novo essa semana eu realmente saio, igual o Victor já avisou.
+      </div>
+      <div class="tags">
+        <span class="tag">reincidência</span>
+        <span class="tag">apoio à causa do Victor</span>
+      </div>
+    </div>
+
+    <div class="cta-fake">
+      <h3>Você também tem uma reclamação sobre gulosice?</h3>
+      <p>Este espaço é só zoeira entre amigos — nenhuma reclamação aqui é real, e o botão abaixo não faz nada.</p>
+      <button>Fazer reclamação (não funciona, é brincadeira)</button>
+    </div>
+  </main>
+
+  <footer>
+    Site fictício feito por diversão, sem qualquer vínculo com o Reclame Aqui® ou com fatos reais sobre o canal citado.<br>
+    Nenhuma reclamação aqui representa uma opinião real ou um evento verdadeiro.
+    <div class="wm">100% paródia — só rir</div>
+  </footer>
+
+</body>
+</html>
